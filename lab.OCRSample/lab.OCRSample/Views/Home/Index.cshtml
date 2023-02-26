@@ -1,0 +1,58 @@
+﻿@model lab.OCRSample.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="display-4">Emgu CV OCR sample</h3>
+    </div>
+    <div class="col-12">
+        <div class="content-form">
+
+            <form id="formEmguCVOCRFileUpload" asp-controller="Home" asp-action="EmguCVOCRFileUpload" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="EmguCVOCRFiles" class="control-label">Upload Emgu CV: </label>
+                    <input type="file" class="form-control" name="EmguCVOCRFiles" multiple required />
+                    <span class="field-validation-valid" data-valmsg-for="EmguCVOCRFiles" data-valmsg-replace="true"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+<div class="row">
+    <div class="col-12">
+        <h3 class="display-4">Google Vision OCR API sample</h3>
+    </div>
+    <div class="col-12">
+        <div class="content-form">
+
+            <form id="formGoogleVisionOCRFileUpload" asp-controller="Home" asp-action="GoogleVisionOCRFileUpload" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="GoogleVisionOCRFiles" class="control-label">Upload Google Vision OCR: </label>
+                    <input type="file" class="form-control" name="GoogleVisionOCRFiles" multiple required />
+                    <span class="field-validation-valid" data-valmsg-for="GoogleVisionOCRFiles" data-valmsg-replace="true"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<br />
+<hr />
