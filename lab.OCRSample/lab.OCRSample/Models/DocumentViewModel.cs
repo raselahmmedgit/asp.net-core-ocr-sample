@@ -2,7 +2,7 @@
 {
     public class DocumentViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string MimeType { get; set; }
         public decimal? FileSizeMb { get; set; }
         public string SourcePath { get; set; }

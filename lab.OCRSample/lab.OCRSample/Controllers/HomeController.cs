@@ -1,6 +1,8 @@
 ﻿using lab.OCRSample.Managers;
 using lab.OCRSample.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
@@ -10,11 +12,13 @@ namespace lab.OCRSample.Controllers
     {
         private readonly ILogger<HomeController> _iLogger;
         private readonly IDataManager _iDataManager;
+        private readonly IWebHostEnvironment _iWebHostEnvironment;
 
-        public HomeController(ILogger<HomeController> iLogger, IDataManager iDataManager)
+        public HomeController(ILogger<HomeController> iLogger, IDataManager iDataManager, IWebHostEnvironment iWebHostEnvironment)
         {
             _iLogger = iLogger;
             _iDataManager = iDataManager;
+            _iWebHostEnvironment = iWebHostEnvironment;
         }
 
         public IActionResult Index()
@@ -84,6 +88,51 @@ namespace lab.OCRSample.Controllers
             }
         }
 
+        public IActionResult EmguCVOCR()
+        {
+            try
+            {
+                var provider = new PhysicalFileProvider(_iWebHostEnvironment.WebRootPath);
+                var contents = provider.GetDirectoryContents(Path.Combine("img"));
+                var objFiles = contents.OrderBy(m => m.LastModified);
+
+                List<string> fileList = new List<string>();
+                foreach (var item in objFiles.ToList())
+                {
+                    fileList.Add(item.Name);
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                _iLogger.LogError(ex, "HomeController - Task<IActionResult> EmguCVOCR()");
+                return ErrorView(ex);
+            }
+        }
+
+        public IActionResult GoogleVisionOCR()
+        {
+            try
+            {
+                var provider = new PhysicalFileProvider(_iWebHostEnvironment.WebRootPath);
+                var contents = provider.GetDirectoryContents(Path.Combine("img"));
+                var objFiles = contents.OrderBy(m => m.LastModified);
+
+                List<string> fileList = new List<string>();
+                foreach (var item in objFiles.ToList())
+                {
+                    fileList.Add(item.Name);
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                _iLogger.LogError(ex, "HomeController - Task<IActionResult> GoogleVisionOCR()");
+                return ErrorView(ex);
+            }
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

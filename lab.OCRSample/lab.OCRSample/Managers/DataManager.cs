@@ -234,7 +234,7 @@ namespace lab.OCRSample.Managers
                     }
 
                     var documentViewModel = new DocumentViewModel();
-                    documentViewModel.Id = model.Id;
+                    documentViewModel.Id = Guid.NewGuid().ToString();
                     documentViewModel.FileName = fileName;
                     documentViewModel.MimeType = extension;
                     documentViewModel.FileSizeMb = fileSize;
@@ -266,7 +266,7 @@ namespace lab.OCRSample.Managers
                     }
 
                     var documentViewModel = new DocumentViewModel();
-                    documentViewModel.Id = model.Id;
+                    documentViewModel.Id = Guid.NewGuid().ToString();
                     documentViewModel.FileName = fileName;
                     documentViewModel.MimeType = extension;
                     documentViewModel.FileSizeMb = fileSize;
